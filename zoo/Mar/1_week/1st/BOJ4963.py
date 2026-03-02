@@ -8,16 +8,30 @@ dx = [-1, 0, 1, -1, 1, -1, 0, 1]
 def find_land(y, x):
     # 현재 땅을 방문 처리
     memo[y][x] = 1 
-    
-    for d in range(8):
-        ny = y + dy[d]
-        nx = x + dx[d]
-        
-        # 지도 범위 안에 있고
-        if 0 <= ny < H and 0 <= nx < W:
-            # 땅이면서 아직 방문하지 않았다면 재귀 탐색
-            if graph[ny][nx] == 1 and memo[ny][nx] == 0:
-                find_land(ny, nx)
+    stack = []
+
+    while True:
+        for d in range(8):
+            ny = y + dy[d]
+            nx = x + dx[d]
+
+            if 0 <= ny < H and 0 <= nx < W:
+                if graph[ny][nx] == 1 and memo[ny][nx] == 0:
+                    stack.append((y, x))\
+                    
+                    y, x = ny, nx
+                    memo[y][x] = 1
+
+                    break
+
+        else:
+            if stack:
+                y, x = stack.pop()
+            else:
+                break # while 탈출
+
+ 
+
 
 # 여러 개의 테스트 케이스를 처리하기 위한 무한 루프
 while True:
