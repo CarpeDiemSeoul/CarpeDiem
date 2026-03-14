@@ -14,7 +14,5 @@ for tc in range(1, T + 1):
         # print(subset)
         if len(subset) == N and sum(subset) == K:
             cnt += 1
-    
-
 
     print(f"#{tc} {cnt}")
